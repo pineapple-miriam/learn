@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>风味探险家 - 全球美食创新平台</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #F4E8D8;
+            --secondary-color: #D4A574;
+            --accent-yellow: #FFD166;
+            --accent-blue: #06D6A0;
+            --accent-red: #EF476F;
+            --text-dark: #2D3142;
+            --text-light: #718096;
+            --white: #FFFFFF;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(244, 232, 216, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-yellow);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-yellow);
+            color: var(--text-dark);
+            box-shadow: 0 5px 15px rgba(255, 209, 102, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 209, 102, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--text-dark);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 8rem 5%;
+            background-color: var(--white);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background-color: var(--primary-color);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-yellow), var(--accent-blue));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Flavor Map Section */
+        .flavor-map {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .map-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .flavor-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .flavor-point {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .flavor-point:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .flavor-point-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .flavor-point-content {
+            padding: 1.5rem;
+        }
+
+        .flavor-point-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .flavor-point-content .origin {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .flavor-point-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Generator Section */
+        .generator {
+            padding: 8rem 5%;
+            background-color: var(--white);
+        }
+
+        .generator-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .generator-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .flavor-panel {
+            background-color: var(--primary-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: fit-content;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .flavor-panel h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .flavor-category {
+            margin-bottom: 2rem;
+        }
+
+        .flavor-category h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .flavor-item {
+            background-color: var(--white);
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            cursor: move;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .flavor-item:hover {
+            background-color: var(--accent-yellow);
+            transform: translateX(5px);
+        }
+
+        .flavor-item.dragging {
+            opacity: 0.5;
+        }
+
+        .canvas {
+            background-color: var(--primary-color);
+            border-radius: 15px;
+            padding: 2rem;
+            min-height: 500px;
+            position: relative;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <path d="M10,10 L90,10 L90,90 L10,90 Z" fill="none" stroke="%23D4A574" stroke-width="2"/>
+  <path d="M10,30 L90,30" fill="none" stroke="%23D4A574" stroke-width="1" stroke-dasharray="5,5"/>
+  <path d="M10,50 L90,50" fill="none" stroke="%23D4A574" stroke-width="1" stroke-dasharray="5,5"/>
+  <path d="M10,70 L90,70" fill="none" stroke="%23D4A574" stroke-width="1" stroke-dasharray="5,5"/>
+  <path d="M30,10 L30,90" fill="none" stroke="%23D4A574" stroke-width="1" stroke-dasharray="5,5"/>
+  <path d="M50,10 L50,90" fill="none" stroke="%23D4A574" stroke-width="1" stroke-dasharray="5,5"/>
+  <path d="M70,10 L70,90" fill="none" stroke="%23D4A574" stroke-width="1" stroke-dasharray="5,5"/>
+</svg>');
+            background-size: 100px 100px;
+        }
+
+        .canvas h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .canvas-dropzone {
+            min-height: 400px;
+            border: 3px dashed var(--secondary-color);
+            border-radius: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1.5rem;
+            align-content: flex-start;
+            transition: all 0.3s ease;
+        }
+
+        .canvas-dropzone.drag-over {
+            border-color: var(--accent-yellow);
+            background-color: rgba(255, 209, 102, 0.1);
+        }
+
+        .canvas-item {
+            background-color: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .canvas-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .canvas-item-remove {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--accent-red);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .canvas-item-remove:hover {
+            background-color: var(--text-dark);
+            transform: scale(1.1);
+        }
+
+        .generator-controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .recipe-result {
+            background-color: var(--primary-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: fit-content;
+            display: none;
+        }
+
+        .recipe-result.active {
+            display: block;
+        }
+
+        .recipe-result h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .recipe-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .recipe-ingredients {
+            margin-bottom: 1.5rem;
+        }
+
+        .recipe-ingredients h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .recipe-ingredients ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .recipe-ingredients li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .recipe-steps {
+            margin-bottom: 1.5rem;
+        }
+
+        .recipe-steps h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .recipe-steps ol {
+            padding-left: 1.5rem;
+        }
+
+        .recipe-steps li {
+            padding: 0.5rem 0;
+            line-height: 1.6;
+        }
+
+        .recipe-rating {
+            background-color: var(--white);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .recipe-rating h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .novelty-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        /* Challenge Section */
+        .challenge {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .challenge-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .weekly-challenge {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .weekly-challenge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-blue));
+            opacity: 0.05;
+        }
+
+        .weekly-challenge h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .challenge-period {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .challenge-elements {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .challenge-element {
+            background-color: var(--primary-color);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .challenge-element:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 8rem 5%;
+            background-color: var(--white);
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            background-color: var(--primary-color);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .gallery-item-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .gallery-item-content {
+            padding: 1.5rem;
+        }
+
+        .gallery-item-content h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .gallery-item-author {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-item-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-item-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .gallery-item-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .gallery-item-btn-primary {
+            background-color: var(--accent-yellow);
+            color: var(--text-dark);
+        }
+
+        .gallery-item-btn-primary:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .gallery-item-btn-secondary {
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark);
+        }
+
+        .gallery-item-btn-secondary:hover {
+            background-color: var(--text-dark);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 5rem 5% 2rem;
+            position: relative;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-yellow);
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background-color: var(--accent-yellow);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .generator-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .flavor-panel {
+                max-height: 400px;
+            }
+
+            .recipe-result {
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flavor-points {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .weekly-challenge {
+                padding: 2rem;
+            }
+
+            .challenge-elements {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card,
+            .flavor-panel,
+            .canvas,
+            .recipe-result {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-globe"></i>
+                风味探险家
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#features">特色</a></li>
+                <li><a href="#flavors">风味地图</a></li>
+                <li><a href="#generator">风味生成器</a></li>
+                <li><a href="#challenge">风味挑战</a></li>
+                <li><a href="#gallery">创意画廊</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80" alt="全球美食" class="hero-background">
+        <div class="hero-content">
+            <h1>探索全球风味</h1>
+            <p>激发美食创造力，将世界各地的风味与艺术性的视觉相结合，生成独一无二的创新配方。</p>
+            <div class="hero-buttons">
+                <a href="#generator" class="btn btn-primary">
+                    <i class="fas fa-magic"></i>
+                    开始创造
+                </a>
+                <a href="#flavors" class="btn btn-secondary">
+                    <i class="fas fa-compass"></i>
+                    探索风味
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-header fade-in">
+            <h2>核心特色</h2>
+            <p>风味探险家提供全方位的美食创新体验，从全球风味数据库到智能配方生成器</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <i class="fas fa-database feature-icon"></i>
+                <h3>全球风味数据库</h3>
+                <p>详尽、分类清晰的全球风味数据库，包含香料与调味、食材基底、饮品元素等三大类数百种风味。</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <i class="fas fa-magic feature-icon"></i>
+                <h3>智能风味生成器</h3>
+                <p>拖拽风味元素到创造画布，系统会提供风味兼容性提醒和独一无二的校验，自动生成完整的电子菜谱卡。</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <i class="fas fa-users feature-icon"></i>
+                <h3>风味挑战社区</h3>
+                <p>每周发布限制元素挑战，用户可以提交自己的创新配方，参与社群投票与评论，建立个人风味探险日志。</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <i class="fas fa-map-marker-alt feature-icon"></i>
+                <h3>原料溯源功能</h3>
+                <p>点击稀有风味，查看购买渠道或原产地介绍，连接小农户或特色供应商，体现人文关怀和可信度。</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <i class="fas fa-camera feature-icon"></i>
+                <h3>美食摄影展示</h3>
+                <p>所有图片均为高质量、高对比度的纪实/人文摄影，捕捉美食制作的瞬间、异域市场的喧嚣和旅行中的色彩。</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <i class="fas fa-heart feature-icon"></i>
+                <h3>个人收藏系统</h3>
+                <p>用户可以保存自己生成的独创配方，建立个人风味探险日志，随时查看和分享自己的美食创意之旅。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flavor Map Section -->
+    <section id="flavors" class="flavor-map">
+        <div class="section-header fade-in">
+            <h2>全球风味地图</h2>
+            <p>探索来自世界各地的特色风味，了解它们的原产地、文化故事和风味轮廓</p>
+        </div>
+
+        <div class="map-container">
+            <div class="flavor-points">
+                <!-- Asia -->
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=80" alt="青柠叶" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>苏门答腊青柠叶</h4>
+                        <p class="origin">印度尼西亚 · 苏门答腊</p>
+                        <p>具有独特的柠檬香气和微妙的花香，是东南亚料理中不可或缺的香料。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&q=80" alt="日本抹茶" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>日本宇治抹茶</h4>
+                        <p class="origin">日本 · 京都</p>
+                        <p>采用蒸青绿茶制作，颜色鲜绿，味道浓郁，带有微妙的海苔和青草香气。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1551754655-cd27e38d20c6?w=400&q=80" alt="越南肉桂" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>越南肉桂</h4>
+                        <p class="origin">越南 · 中部高原</p>
+                        <p>香气浓郁，味道甜美，比普通肉桂更具风味，常用于甜点和饮品中。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&q=80" alt="印度咖喱叶" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>印度咖喱叶</h4>
+                        <p class="origin">印度 · 南部</p>
+                        <p>具有独特的香气，是印度料理中不可或缺的香料，常用于调味和装饰。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=80" alt="泰国柠檬草" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>泰国柠檬草</h4>
+                        <p class="origin">泰国 · 东北部</p>
+                        <p>具有独特的柠檬香气和微妙的草香，是泰国料理中不可或缺的香料。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&q=80" alt="韩国红参" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>韩国红参</h4>
+                        <p class="origin">韩国 · 江原道</p>
+                        <p>具有独特的香气和味道，是韩国料理中不可或缺的食材，常用于汤和甜点中。</p>
+                    </div>
+                </div>
+
+                <!-- Americas -->
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1598170845156-9ca10cc8a870?w=400&q=80" alt="阿希潘卡辣椒" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>秘鲁阿希潘卡辣椒</h4>
+                        <p class="origin">秘鲁 · 安第斯山脉</p>
+                        <p>颜色鲜艳，味道辛辣中带有水果甜味，常用于秘鲁传统料理中的调味料。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1606313564359-7091011f2d3a?w=400&q=80" alt="墨西哥巧克力" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>墨西哥巧克力</h4>
+                        <p class="origin">墨西哥 · 瓦哈卡</p>
+                        <p>采用传统方法制作，带有肉桂和香草的香气，味道浓郁，常用于热巧克力和甜点中。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505?w=400&q=80" alt="巴西卡莎萨" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>巴西卡莎萨</h4>
+                        <p class="origin">巴西 · 东北部</p>
+                        <p>采用甘蔗汁发酵蒸馏而成，是巴西的国酒，味道清爽，常用于鸡尾酒和混合饮品中。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1546470427-3e414b31e736?w=400&q=80" alt="阿根廷马黛茶" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>阿根廷马黛茶</h4>
+                        <p class="origin">阿根廷 · 米西奥内斯省</p>
+                        <p>具有独特的香气和味道，是阿根廷的国茶，常用于社交场合和日常饮品中。</p>
+                    </div>
+                </div>
+
+                <!-- Europe -->
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1617100318387-0a86200333f4?w=400&q=80" alt="地中海橄榄" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>地中海黑橄榄</h4>
+                        <p class="origin">希腊 · 克里特岛</p>
+                        <p>味道浓郁，带有微妙的苦味和果香，常用于地中海料理中的开胃菜、沙拉和主菜。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80" alt="意大利松露" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>意大利白松露</h4>
+                        <p class="origin">意大利 · 皮埃蒙特</p>
+                        <p>世界上最昂贵的食材之一，具有独特的香气，常用于意大利料理中的调味和装饰。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&q=80" alt="法国鹅肝" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>法国鹅肝</h4>
+                        <p class="origin">法国 · 西南地区</p>
+                        <p>世界上最著名的美食之一，具有浓郁的香气和柔滑的口感，常用于法国料理中的主菜和甜点。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&q=80" alt="西班牙伊比利亚火腿" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>西班牙伊比利亚火腿</h4>
+                        <p class="origin">西班牙 · 安达卢西亚</p>
+                        <p>世界上最著名的火腿之一，具有浓郁的香气和柔滑的口感，常用于西班牙料理中的开胃菜和主菜。</p>
+                    </div>
+                </div>
+
+                <!-- Africa -->
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1546470427-3e414b31e736?w=400&q=80" alt="埃塞俄比亚咖啡" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>埃塞俄比亚耶加雪菲咖啡</h4>
+                        <p class="origin">埃塞俄比亚 · 耶加雪菲</p>
+                        <p>具有明亮的酸度和独特的花香、水果香气，是世界上最受欢迎的精品咖啡之一。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400&q=80" alt="摩洛哥孜然" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>摩洛哥孜然</h4>
+                        <p class="origin">摩洛哥 · 撒哈拉沙漠</p>
+                        <p>具有浓郁的香气，是摩洛哥料理中不可或缺的香料，常用于调味和腌制肉类。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400&q=80" alt="南非罗勒" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>南非罗勒</h4>
+                        <p class="origin">南非 · 西开普省</p>
+                        <p>具有独特的香气，是南非料理中不可或缺的香料，常用于调味和装饰。</p>
+                    </div>
+                </div>
+
+                <!-- Oceania -->
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1542834369-7a3d7b2cec73?w=400&q=80" alt="澳大利亚桉树蜜" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>澳大利亚桉树蜜</h4>
+                        <p class="origin">澳大利亚 · 昆士兰州</p>
+                        <p>具有独特的桉树香气和浓郁的甜味，是世界上最著名的蜂蜜之一，常用于调味和甜点中。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1542834369-7a3d7b2cec73?w=400&q=80" alt="新西兰猕猴桃" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>新西兰猕猴桃</h4>
+                        <p class="origin">新西兰 · 北岛</p>
+                        <p>具有独特的香气和味道，是新西兰的国果，常用于甜点和饮品中。</p>
+                    </div>
+                </div>
+
+                <!-- General -->
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1517701550927-02b9f759d60c?w=400&q=80" alt="喜马拉雅盐" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>喜马拉雅粉盐</h4>
+                        <p class="origin">巴基斯坦 · 喜马拉雅山脉</p>
+                        <p>富含矿物质，呈现出独特的粉红色，味道温和，常用于高级料理和特色饮品中。</p>
+                    </div>
+                </div>
+
+                <div class="flavor-point fade-in">
+                    <img src="https://images.unsplash.com/photo-1517701550927-02b9f759d60c?w=400&q=80" alt="马达加斯加香草" class="flavor-point-image">
+                    <div class="flavor-point-content">
+                        <h4>马达加斯加香草</h4>
+                        <p class="origin">马达加斯加 · 东北海岸</p>
+                        <p>具有独特的香气和味道，是世界上最著名的香草之一，常用于甜点和饮品中。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Generator Section -->
+    <section id="generator" class="generator">
+        <div class="section-header fade-in">
+            <h2>风味生成器</h2>
+            <p>拖拽风味元素到中央的创造画布，系统会自动为您生成独特的创新配方</p>
+        </div>
+
+        <div class="generator-container">
+            <div class="generator-layout">
+                <!-- Left Flavor Panel -->
+                <div class="flavor-panel">
+                    <h3><i class="fas fa-list"></i> 风味元素</h3>
+                    
+                    <div class="flavor-category">
+                        <h4><i class="fas fa-pepper-hot"></i> 香料与调味</h4>
+                        <div class="flavor-item" draggable="true" data-flavor="青柠叶">
+                            <i class="fas fa-leaf"></i>
+                            <span>青柠叶</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="阿希潘卡辣椒">
+                            <i class="fas fa-fire"></i>
+                            <span>阿希潘卡辣椒</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="喜马拉雅粉盐">
+                            <i class="fas fa-salt"></i>
+                            <span>喜马拉雅粉盐</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="香草精">
+                            <i class="fas fa-star"></i>
+                            <span>香草精</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="越南肉桂">
+                            <i class="fas fa-cinnamon-stick"></i>
+                            <span>越南肉桂</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="印度咖喱叶">
+                            <i class="fas fa-leaf"></i>
+                            <span>印度咖喱叶</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="摩洛哥孜然">
+                            <i class="fas fa-seedling"></i>
+                            <span>摩洛哥孜然</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="马达加斯加香草">
+                            <i class="fas fa-star"></i>
+                            <span>马达加斯加香草</span>
+                        </div>
+                    </div>
+
+                    <div class="flavor-category">
+                        <h4><i class="fas fa-apple-alt"></i> 食材基底</h4>
+                        <div class="flavor-item" draggable="true" data-flavor="黑豆">
+                            <i class="fas fa-seedling"></i>
+                            <span>黑豆</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="藜麦">
+                            <i class="fas fa-grain"></i>
+                            <span>藜麦</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="椰子">
+                            <i class="fas fa-coconut"></i>
+                            <span>椰子</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="杏仁奶">
+                            <i class="fas fa-glass-martini"></i>
+                            <span>杏仁奶</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="日本宇治抹茶">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>日本宇治抹茶</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="墨西哥巧克力">
+                            <i class="fas fa-chocolate-bar"></i>
+                            <span>墨西哥巧克力</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="新西兰猕猴桃">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>新西兰猕猴桃</span>
+                        </div>
+                        <div class="flavor-item" draggable="true" data-flavor="巴西卡莎萨">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>巴西卡莎萨</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Canvas -->
+                <div class="canvas">
+                    <h3><i class="fas fa-palette"></i> 创造画布</h3>
+                    <div class="canvas-dropzone" id="canvasDropzone">
+                        <p style="color: var(--text-light); text-align: center; width: 100%; margin-top: 5rem;">拖拽风味元素到这里开始创造...</p>
+                    </div>
+                    <div class="generator-controls">
+                        <button class="btn btn-primary" id="generateRecipe">
+                            <i class="fas fa-magic"></i>
+                            生成配方
+                        </button>
+                        <button class="btn btn-secondary" id="clearCanvas">
+                            <i class="fas fa-eraser"></i>
+                            清空画布
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Recipe Result -->
+                <div class="recipe-result" id="recipeResult">
+                    <h3><i class="fas fa-utensils"></i> 配方结果</h3>
+                    <div class="recipe-name" id="recipeName">风味探险家特调</div>
+                    
+                    <div class="recipe-ingredients">
+                        <h4><i class="fas fa-shopping-basket"></i> 食材清单</h4>
+                        <ul id="recipeIngredients">
+                            <!-- Ingredients will be added here dynamically -->
+                        </ul>
+                    </div>
+
+                    <div class="recipe-steps">
+                        <h4><i class="fas fa-list-ol"></i> 制作步骤</h4>
+                        <ol id="recipeSteps">
+                            <!-- Steps will be added here dynamically -->
+                        </ol>
+                    </div>
+
+                    <div class="recipe-rating">
+                        <h4><i class="fas fa-star"></i> 新颖度评分</h4>
+                        <div class="novelty-score" id="noveltyScore">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenge Section -->
+    <section id="challenge" class="challenge">
+        <div class="section-header fade-in">
+            <h2>风味挑战</h2>
+            <p>每周发布限制元素挑战，激发您的美食创造力，与全球美食爱好者一起探索新口味</p>
+        </div>
+
+        <div class="challenge-container">
+            <div class="weekly-challenge fade-in">
+                <h3>本周挑战：藏红花的艺术</h3>
+                <p class="challenge-period">2024年1月15日 - 2024年1月21日</p>
+                
+                <div class="challenge-elements">
+                    <div class="challenge-element">
+                        <i class="fas fa-seedling"></i>
+                        <br>藏红花
+                    </div>
+                    <div class="challenge-element">
+                        <i class="fas fa-carrot"></i>
+                        <br>竹笋
+                    </div>
+                    <div class="challenge-element">
+                        <i class="fas fa-glass-martini"></i>
+                        <br>杏仁奶
+                    </div>
+                </div>
+
+                <p style="margin-bottom: 2rem; color: var(--text-light);">
+                    挑战要求：使用上述三个元素作为主要食材，创造出独特的美食配方。可以添加其他辅助食材，但必须突出这三个元素的风味特点。
+                </p>
+
+                <a href="#generator" class="btn btn-primary">
+                    <i class="fas fa-pen-fancy"></i>
+                    参与挑战
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="section-header fade-in">
+            <h2>创意画廊</h2>
+            <p>探索全球美食爱好者创造的独特配方，为您的下一次美食冒险寻找灵感</p>
+        </div>
+
+        <div class="gallery-container">
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="青柠叶料理" class="gallery-item-image">
+                    <div class="gallery-item-content">
+                        <h4>青柠叶黑豆炖</h4>
+                        <p class="gallery-item-author">创作者：美食探险家</p>
+                        <p class="gallery-item-description">将苏门答腊青柠叶的独特香气与黑豆的浓郁口感相结合，创造出令人惊喜的风味组合。</p>
+                        <div class="gallery-item-actions">
+                            <button class="gallery-item-btn gallery-item-btn-primary">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <button class="gallery-item-btn gallery-item-btn-secondary">
+                                <i class="fas fa-heart"></i> 收藏
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1598170845156-9ca10cc8a870?w=600&q=80" alt="辣椒料理" class="gallery-item-image">
+                    <div class="gallery-item-content">
+                        <h4>阿希潘卡辣椒藜麦饭</h4>
+                        <p class="gallery-item-author">创作者：秘鲁美食家</p>
+                        <p class="gallery-item-description">秘鲁阿希潘卡辣椒的辛辣与水果甜味，与藜麦的坚果香气完美融合，创造出独特的安第斯山脉风味。</p>
+                        <div class="gallery-item-actions">
+                            <button class="gallery-item-btn gallery-item-btn-primary">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <button class="gallery-item-btn gallery-item-btn-secondary">
+                                <i class="fas fa-heart"></i> 收藏
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1517701550927-02b9f759d60c?w=600&q=80" alt="盐料理" class="gallery-item-image">
+                    <div class="gallery-item-content">
+                        <h4>喜马拉雅粉盐烤海鲜</h4>
+                        <p class="gallery-item-author">创作者：海边的厨师</p>
+                        <p class="gallery-item-description">喜马拉雅粉盐的温和味道，与新鲜海鲜的甜味完美结合，创造出简单而精致的美味。</p>
+                        <div class="gallery-item-actions">
+                            <button class="gallery-item-btn gallery-item-btn-primary">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <button class="gallery-item-btn gallery-item-btn-secondary">
+                                <i class="fas fa-heart"></i> 收藏
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600&q=80" alt="抹茶料理" class="gallery-item-image">
+                    <div class="gallery-item-content">
+                        <h4>宇治抹茶椰子布丁</h4>
+                        <p class="gallery-item-author">创作者：日本甜品师</p>
+                        <p class="gallery-item-description">日本宇治抹茶的浓郁香气，与椰子的热带风味完美融合，创造出独特的东方甜品。</p>
+                        <div class="gallery-item-actions">
+                            <button class="gallery-item-btn gallery-item-btn-primary">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <button class="gallery-item-btn gallery-item-btn-secondary">
+                                <i class="fas fa-heart"></i> 收藏
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1546470427-3e414b31e736?w=600&q=80" alt="咖啡料理" class="gallery-item-image">
+                    <div class="gallery-item-content">
+                        <h4>耶加雪菲咖啡炖肉</h4>
+                        <p class="gallery-item-author">创作者：埃塞俄比亚厨师</p>
+                        <p class="gallery-item-description">埃塞俄比亚耶加雪菲咖啡的明亮酸度和花香，与炖肉的浓郁口感完美融合，创造出独特的非洲风味。</p>
+                        <div class="gallery-item-actions">
+                            <button class="gallery-item-btn gallery-item-btn-primary">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <button class="gallery-item-btn gallery-item-btn-secondary">
+                                <i class="fas fa-heart"></i> 收藏
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1617100318387-0a86200333f4?w=600&q=80" alt="橄榄料理" class="gallery-item-image">
+                    <div class="gallery-item-content">
+                        <h4>地中海黑橄榄沙拉</h4>
+                        <p class="gallery-item-author">创作者：希腊美食家</p>
+                        <p class="gallery-item-description">地中海黑橄榄的浓郁味道，与新鲜蔬菜的清爽口感完美融合，创造出简单而健康的地中海风味。</p>
+                        <div class="gallery-item-actions">
+                            <button class="gallery-item-btn gallery-item-btn-primary">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <button class="gallery-item-btn gallery-item-btn-secondary">
+                                <i class="fas fa-heart"></i> 收藏
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>风味探险家</h3>
+                    <p>激发美食创造力，将世界各地的风味与艺术性的视觉相结合，生成独一无二的创新配方。</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#features">特色</a></li>
+                        <li><a href="#flavors">风味地图</a></li>
+                        <li><a href="#generator">风味生成器</a></li>
+                        <li><a href="#challenge">风味挑战</a></li>
+                        <li><a href="#gallery">创意画廊</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>联系我们</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contact@flavorexplorer.com</li>
+                        <li><i class="fas fa-phone"></i> +86 123 4567 8910</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 北京市朝阳区美食街123号</li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>订阅更新</h3>
+                    <p>订阅我们的 newsletter，获取最新的风味挑战、创意配方和美食灵感。</p>
+                    <form style="margin-top: 1rem;">
+                        <input type="email" placeholder="您的邮箱地址" style="width: 100%; padding: 0.8rem; border-radius: 10px; border: none; margin-bottom: 0.8rem;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> 订阅
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 风味探险家. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Drag and drop functionality for flavor generator
+        let draggedElement = null;
+
+        // Add drag event listeners to flavor items
+        document.querySelectorAll('.flavor-item').forEach(item => {
+            item.addEventListener('dragstart', function(e) {
+                draggedElement = this;
+                this.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', this.innerHTML);
+            });
+
+            item.addEventListener('dragend', function() {
+                this.classList.remove('dragging');
+                draggedElement = null;
+            });
+        });
+
+        // Add drop event listeners to canvas
+        const canvasDropzone = document.getElementById('canvasDropzone');
+
+        canvasDropzone.addEventListener('dragover', function(e) {
+            if (draggedElement) {
+                e.preventDefault();
+                this.classList.add('drag-over');
+                e.dataTransfer.dropEffect = 'move';
+            }
+        });
+
+        canvasDropzone.addEventListener('dragleave', function() {
+            this.classList.remove('drag-over');
+        });
+
+        canvasDropzone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+
+            if (draggedElement) {
+                const flavorName = draggedElement.getAttribute('data-flavor');
+                
+                // Remove the initial message if present
+                const initialMessage = this.querySelector('p');
+                if (initialMessage) {
+                    initialMessage.remove();
+                }
+
+                // Create a new canvas item
+                const canvasItem = document.createElement('div');
+                canvasItem.className = 'canvas-item';
+                canvasItem.innerHTML = `
+                    <button class="canvas-item-remove"><i class="fas fa-times"></i></button>
+                    <i class="fas fa-leaf"></i>
+                    <span>${flavorName}</span>
+                `;
+
+                // Add remove functionality
+                const removeBtn = canvasItem.querySelector('.canvas-item-remove');
+                removeBtn.addEventListener('click', () => {
+                    canvasItem.remove();
+                    
+                    // Show initial message if canvas is empty
+                    if (this.children.length === 0) {
+                        this.innerHTML = '<p style="color: var(--text-light); text-align: center; width: 100%; margin-top: 5rem;">拖拽风味元素到这里开始创造...</p>';
+                    }
+                });
+
+                // Add the canvas item to the dropzone
+                this.appendChild(canvasItem);
+
+                // Close recipe result if it's open
+                const recipeResult = document.getElementById('recipeResult');
+                recipeResult.classList.remove('active');
+            }
+        });
+
+        // Clear canvas functionality
+        document.getElementById('clearCanvas').addEventListener('click', () => {
+            canvasDropzone.innerHTML = '<p style="color: var(--text-light); text-align: center; width: 100%; margin-top: 5rem;">拖拽风味元素到这里开始创造...</p>';
+            
+            // Close recipe result if it's open
+            const recipeResult = document.getElementById('recipeResult');
+            recipeResult.classList.remove('active');
+        });
+
+        // Gallery item interaction functionality
+        document.querySelectorAll('.gallery-item-btn-primary').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const galleryItem = e.target.closest('.gallery-item');
+                const recipeName = galleryItem.querySelector('h4').textContent;
+                const recipeDescription = galleryItem.querySelector('.gallery-item-description').textContent;
+                
+                alert(`查看详情：\n\n${recipeName}\n${recipeDescription}\n\n点击"生成配方"按钮，在风味生成器中尝试创造这个配方！`);
+            });
+        });
+
+        document.querySelectorAll('.gallery-item-btn-secondary').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const heartIcon = e.target.closest('button').querySelector('i');
+                
+                if (heartIcon.classList.contains('fas')) {
+                    heartIcon.classList.remove('fas');
+                    heartIcon.classList.add('far');
+                    alert('已取消收藏');
+                } else {
+                    heartIcon.classList.remove('far');
+                    heartIcon.classList.add('fas');
+                    alert('收藏成功！');
+                }
+            });
+        });
+
+        // Generate recipe functionality
+        document.getElementById('generateRecipe').addEventListener('click', () => {
+            const canvasItems = canvasDropzone.querySelectorAll('.canvas-item');
+            
+            if (canvasItems.length === 0) {
+                alert('请先添加风味元素到创造画布！');
+                return;
+            }
+
+            // Collect selected flavors
+            const selectedFlavors = [];
+            canvasItems.forEach(item => {
+                const flavorName = item.querySelector('span').textContent;
+                selectedFlavors.push(flavorName);
+            });
+
+            // Generate recipe name
+            const recipeNames = [
+                '风味探险家特调',
+                '全球风味融合',
+                '创意美食之旅',
+                '世界风味交响曲',
+                '探险家的秘密配方'
+            ];
+            const randomRecipeName = recipeNames[Math.floor(Math.random() * recipeNames.length)];
+
+            // Generate ingredients list
+            const ingredientsList = document.getElementById('recipeIngredients');
+            ingredientsList.innerHTML = '';
+            selectedFlavors.forEach(flavor => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <i class="fas fa-check-circle" style="color: var(--accent-blue);"></i>
+                    <span>${flavor} - 适量</span>
+                `;
+                ingredientsList.appendChild(listItem);
+            });
+
+            // Generate cooking steps
+            const stepsList = document.getElementById('recipeSteps');
+            stepsList.innerHTML = '';
+            
+            const step1 = document.createElement('li');
+            step1.textContent = `准备所有食材：${selectedFlavors.join('、')}。`;
+            stepsList.appendChild(step1);
+
+            const step2 = document.createElement('li');
+            step2.textContent = '根据所选食材的特点，选择合适的烹饪方法（炒、煮、炖、烤等）。';
+            stepsList.appendChild(step2);
+
+            const step3 = document.createElement('li');
+            step3.textContent = '按照顺序加入食材，注意控制火候和烹饪时间，确保每种食材都能发挥出最佳风味。';
+            stepsList.appendChild(step3);
+
+            const step4 = document.createElement('li');
+            step4.textContent = '根据个人口味调整调味料的用量，最后装盘即可享用。';
+            stepsList.appendChild(step4);
+
+            // Generate novelty score (random between 70% and 99%)
+            const noveltyScore = Math.floor(Math.random() * 30) + 70;
+            document.getElementById('noveltyScore').textContent = `${noveltyScore}%`;
+
+            // Update recipe name
+            document.getElementById('recipeName').textContent = randomRecipeName;
+
+            // Show recipe result
+            const recipeResult = document.getElementById('recipeResult');
+            recipeResult.classList.add('active');
+
+            // Scroll to recipe result
+            recipeResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    </script>
+</body>
+</html>
